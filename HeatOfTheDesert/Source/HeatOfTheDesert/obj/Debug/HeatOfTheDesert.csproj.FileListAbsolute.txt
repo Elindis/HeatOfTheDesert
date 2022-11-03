@@ -1,0 +1,10 @@
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert\Assemblies\HeatOfTheDesert.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.csproj.CopyComplete
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert - Copy\Assemblies\HeatOfTheDesert.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert - Copy\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert - Copy\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert - Copy\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.csproj.CopyComplete
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\HeatOfTheDesert - Copy\Source\HeatOfTheDesert\obj\Debug\HeatOfTheDesert.dll

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationReplace">
+	    <xpath>Defs/ThingDef[defName = "Apparel_Duster"]/statBases/StuffEffectMultiplierInsulation_Heat</xpath>
+		<value>
+			<StuffEffectMultiplierInsulation_Heat>5.0</StuffEffectMultiplierInsulation_Heat>
+		</value>
+    </Operation>
+</Patch>

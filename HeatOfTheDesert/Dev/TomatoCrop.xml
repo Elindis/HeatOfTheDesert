@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="PlantBase">
+    <defName>Plant_Tomato</defName>
+    <label>tomato plant</label>
+    <description>A short, fast-growing crop that yields small edible grains. Its great nutritional output and ease of cultivation has made it the economic core of many great civilizations. While rice grows quickly, it is sensitive to soil fertility and will not fare well in poor soil.</description>
+
+	<statBases>
+      <MaxHitPoints>85</MaxHitPoints>
+      <Nutrition>0.175</Nutrition>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Plant/PotatoPlant</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <selectable>true</selectable>
+    <pathCost>14</pathCost>
+    <ingestible />
+    <plant>
+      <dieIfLeafless>true</dieIfLeafless>
+      <maxMeshCount>4</maxMeshCount>
+      <harvestTag>Standard</harvestTag>
+      <harvestedThingDef>RawRice</harvestedThingDef>
+      <harvestYield>6</harvestYield>
+      <sowTags>
+        <li>Ground</li>
+        <li>Hydroponic</li>
+      </sowTags>
+      <topWindExposure>0.1</topWindExposure>
+      <growDays>3</growDays>
+      <visualSizeRange>0.3~0.8</visualSizeRange>
+      <wildOrder>2</wildOrder>
+      <purpose>Food</purpose>
+      <humanFoodPlant>true</humanFoodPlant>
+    </plant>
+	
+	<!-- Mod Boilerplate -->
+	<thingClass>HeatOfTheDesert.Fragile_Plant</thingClass>
+	<modExtensions>
+		<li Class="HeatOfTheDesert.HeatOfTheDesertExtension">
+		
+		<!-- Mod Properties -->
+		<diesInHeat>true</diesInHeat>
+		<maxOptimalTemperature>16.0</maxOptimalTemperature>
+		<deathTemperature>28.0</deathTemperature>
+
+		
+		</li>
+	</modExtensions>
+	
+  </ThingDef>
+  
+</Defs>
