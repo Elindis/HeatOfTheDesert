@@ -62,10 +62,13 @@ namespace HeatOfTheDesert
             listingStandard.Begin(inRect);
             listingStandard.ColumnWidth /= 2;
 
-            listingStandard.CheckboxLabeled("Plants die in heat", ref Settings.plantsDie);
+            
 
             listingStandard.Label("");
             listingStandard.Label("Plant settings:");
+            listingStandard.Label("");
+
+            listingStandard.CheckboxLabeled("Plants die in heat", ref Settings.plantsDie);
             listingStandard.Label("");
 
             listingStandard.Label("Max optimal temperature: " +Mathf.Round(Settings.optimal));
