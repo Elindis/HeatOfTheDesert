@@ -1,14 +1,10 @@
 ﻿using HarmonyLib;
-using HeatOfTheDesert;
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using Verse;
 
-namespace ExpandablePlants
+namespace HeatOfTheDesert
 {
     // I'm 99% sure I don't need this. I could create a blank window and concatenate a bunch of entries instead.
     [StaticConstructorOnStartup]

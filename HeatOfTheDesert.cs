@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
-using Verse;
-using System.ComponentModel;
+﻿using Verse;
 
 namespace HeatOfTheDesert
-{ 
+{
     public class HeatOfTheDesertExtension : DefModExtension
     {
         //static HeatOfTheDesertExtension()
@@ -17,7 +10,7 @@ namespace HeatOfTheDesert
         //}
 
         public bool diesInHeat = true;
-        public float deathTemperature = 48f;
-        public float maxOptimalTemperature = 42f;
+        public float deathTemperature = 18f;
+        public float maxOptimalTemperature = 12f;
     }
 }

@@ -1,30 +1,26 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
 using UnityEngine;
 using Verse;
-using static HarmonyLib.Code;
 
 namespace HeatOfTheDesert
 {
     public class Fragile_Plant : Plant
     {
         public HeatOfTheDesertExtension Props => def.GetModExtension<HeatOfTheDesertExtension>();
-        public float deathTemperature => def.GetModExtension<HeatOfTheDesertExtension>().deathTemperature;        
-        public float maxOptimalTemperature => def.GetModExtension<HeatOfTheDesertExtension>().maxOptimalTemperature;        
+        public float deathTemperature => def.GetModExtension<HeatOfTheDesertExtension>().deathTemperature;
+        public float maxOptimalTemperature => def.GetModExtension<HeatOfTheDesertExtension>().maxOptimalTemperature;
         public bool diesInHeat => def.GetModExtension<HeatOfTheDesertExtension>().diesInHeat;
 
         private string cachedLabelMouseover;
 
 
-        #region Overrides
         // Burnable crops will take damage once the ambient temperature threshold x is reached.
         // This is called once every TickLong (33 seconds?), and happens at a y% chance.
         public override void TickLong()
         {
+            Log.Message("hi");
             base.TickLong();
             HeatDeathCheck();
         }
@@ -36,11 +32,16 @@ namespace HeatOfTheDesert
             float random = Rand.Value;
             if (random < 0.07f)
             {
-                if (MessagesRepeatAvoider.MessageShowAllowed("MessagePlantDiedOfHeat-" + def.defName, 3f))
+                // Messages should only play for crops!
+                if (this.IsCrop)
                 {
-                    string messageString = "MessagePlantDiedOfHeat".Translate(GetCustomLabelNoCount(false)).CapitalizeFirst();
-                    Messages.Message(messageString, new TargetInfo(Position, Map, false), MessageTypeDefOf.NegativeEvent);
+                    if (MessagesRepeatAvoider.MessageShowAllowed("MessagePlantDiedOfHeat-" + def.defName, 3f))
+                    {
+                        string messageString = "MessagePlantDiedOfHeat".Translate(GetCustomLabelNoCount(false)).CapitalizeFirst();
+                        Messages.Message(messageString, new TargetInfo(Position, Map, false), MessageTypeDefOf.NegativeEvent);
+                    }
                 }
+                
                 this.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999f));
             }
         }
@@ -74,20 +75,20 @@ namespace HeatOfTheDesert
         }
 
         // I am not sure if these two are necessary, but I don't want to touch them.
-        public override void PostMapInit()
-        {
-            base.PostMapInit();
-            HeatDeathCheck();
-        }
+        //public override void PostMapInit()
+        //{
+        //    base.PostMapInit();
+        //    HeatDeathCheck();
+        //}
 
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
-            if (Current.ProgramState == ProgramState.Playing && !respawningAfterLoad)
-            {
-                PostMapInit();
-            }
-        }
+        //public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        //{
+        //    base.SpawnSetup(map, respawningAfterLoad);
+        //    if (Current.ProgramState == ProgramState.Playing && !respawningAfterLoad)
+        //    {
+        //        PostMapInit();
+        //    }
+        //}
 
 
         // Everything from here on is UI-oriented.
@@ -215,10 +216,10 @@ namespace HeatOfTheDesert
 
                 if (GrowthRateFactor_Temperature != 1f)
                     sb.AppendInNewLine("StatsReport_MultiplierFor".Translate("TemperatureLower".Translate()) + ": " + GrowthRateFactor_Temperature.ToStringPercent());
-                
+
                 if (GrowthRateFactor_Temperature_Fragile != 1f)
                     sb.AppendInNewLine("StatsReport_MultiplierFor".Translate("TemperatureLower".Translate()) + ": " + GrowthRateFactor_Temperature_Fragile.ToStringPercent());
-                
+
                 if (GrowthRateFactor_Light != 1f)
                     sb.AppendInNewLine("StatsReport_MultiplierFor".Translate("LightLower".Translate()) + ": " + GrowthRateFactor_Light.ToStringPercent());
 
@@ -230,7 +231,5 @@ namespace HeatOfTheDesert
         }
 
 
-        
-        #endregion Overrides
     }
 }

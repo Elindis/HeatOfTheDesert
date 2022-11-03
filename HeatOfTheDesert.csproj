@@ -56,7 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Harmony.cs" />
+    <Compile Include="HarmonyPatches.cs" />
     <Compile Include="Fragile_Plant.cs" />
     <Compile Include="HeatOfTheDesert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
