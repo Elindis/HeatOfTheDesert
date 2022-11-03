@@ -154,7 +154,7 @@ namespace HeatOfTheDesert
                 return cachedLabelMouseover;
             }
         }
-
+        // This is for the inspection pane in the lower-left corner of the screen.
         public override string GetInspectString()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -226,7 +226,7 @@ namespace HeatOfTheDesert
                 growthRateDesc += "\n" + "StatsReport_FinalValue".Translate() + ": " + GrowthRate.ToStringPercent();
 
                 yield return new StatDrawEntry(StatCategoryDefOf.BasicsImportant,
-                    "Stat_Thing_Plant_GrowthRate".Translate(),
+                    "Stat_Thing_Plant_GrowthRate_Fragile".Translate(),
                     GrowthRate.ToStringPercent(),
                     growthRateDesc,
                     StatDisplayOrder.Thing_Plant_GrowthRate);
@@ -241,8 +241,8 @@ namespace HeatOfTheDesert
                 if (GrowthRateFactor_Fertility != 1f)
                     sb.AppendInNewLine("StatsReport_MultiplierFor".Translate("FertilityLower".Translate()) + ": " + GrowthRateFactor_Fertility.ToStringPercent());
 
-                if (GrowthRateFactor_Temperature != 1f)
-                    sb.AppendInNewLine("StatsReport_MultiplierFor".Translate("TemperatureLower".Translate()) + ": " + GrowthRateFactor_Temperature.ToStringPercent());
+                //if (GrowthRateFactor_Temperature != 1f)
+                //    sb.AppendInNewLine("StatsReport_MultiplierFor".Translate("TemperatureLower".Translate()) + ": " + GrowthRateFactor_Temperature.ToStringPercent());
 
                 if (GrowthRateFactor_Temperature_Fragile != 1f)
                     sb.AppendInNewLine("StatsReport_MultiplierFor".Translate("TemperatureLower".Translate()) + ": " + GrowthRateFactor_Temperature_Fragile.ToStringPercent());

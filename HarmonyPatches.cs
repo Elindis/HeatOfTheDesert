@@ -21,6 +21,7 @@ namespace HeatOfTheDesert
 
         public static string OldMinGrowthTemperatureEntryLabel => "MinGrowthTemperature".Translate().CapitalizeFirst();
         public static string OldMaxGrowthTemperatureEntryLabel => "MaxGrowthTemperature".Translate().CapitalizeFirst();
+        public static string OldGrowthRateLabel => "Stat_Thing_Plant_GrowthRate".Translate();
 
         // Keep all StatDrawEntries except those with the growth temperature labels.
         private static void RemoveConstantGrowthTemperatureDisplay(ref IEnumerable<StatDrawEntry> __result)
@@ -28,6 +29,10 @@ namespace HeatOfTheDesert
             __result = __result.Where((StatDrawEntry entry) =>
             {
                 if (entry.LabelCap.Equals(OldMinGrowthTemperatureEntryLabel) || entry.LabelCap.Equals(OldMaxGrowthTemperatureEntryLabel))
+                {
+                    return false;
+                }
+                if (entry.LabelCap.Equals(OldGrowthRateLabel))
                 {
                     return false;
                 }
