@@ -9,8 +9,9 @@ namespace HeatOfTheDesert
         //    Log.Message("Mod initialized!");
         //}
 
-        public bool diesInHeat = true;
-        public float deathTemperature = 18f;
-        public float maxOptimalTemperature = 12f;
+        public bool diesInHeat = Settings.plantsDie;
+        public float deathTemperature = Settings.survivable;
+        public float maxOptimalTemperature = Settings.optimal;
+        public float maxGrowthTemperature = Settings.growth;
     }
 }

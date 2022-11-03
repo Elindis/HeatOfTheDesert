@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace HeatOfTheDesert
 {
@@ -11,7 +12,12 @@ namespace HeatOfTheDesert
         public HeatOfTheDesertExtension Props => def.GetModExtension<HeatOfTheDesertExtension>();
         public float deathTemperature => def.GetModExtension<HeatOfTheDesertExtension>().deathTemperature;
         public float maxOptimalTemperature => def.GetModExtension<HeatOfTheDesertExtension>().maxOptimalTemperature;
+        public float maxGrowthTemperature => def.GetModExtension<HeatOfTheDesertExtension>().maxGrowthTemperature;
         public bool diesInHeat => def.GetModExtension<HeatOfTheDesertExtension>().diesInHeat;
+
+        //public bool diesInHeat = Settings.plantsDie;
+        //public float maxOptimalTemperature = (float)Settings.growth;
+        //public float deathTemperature = (float)Settings.survivable;
 
         private string cachedLabelMouseover;
 
@@ -20,31 +26,52 @@ namespace HeatOfTheDesert
         // This is called once every TickLong (33 seconds?), and happens at a y% chance.
         public override void TickLong()
         {
-            Log.Message("hi");
             base.TickLong();
             HeatDeathCheck();
         }
 
         private void HeatDeathCheck()
         {
+            // The heat death check only passes if death to heat is enabled in the config, and if the temperature is right.
             if (!diesInHeat) return;
             if (this.AmbientTemperature < deathTemperature) return;
             float random = Rand.Value;
+
+            // Each longtick has a 7% chance of killing a plant if the conditions are met.
             if (random < 0.07f)
             {
-                // Messages should only play for crops!
-                if (this.IsCrop)
+                // This is a secret that will help us later.
+                var map = Map;
+
+                // If the plant isn't the type that can lose its leaves without dying, then we kill it.
+                if (def.plant.dieIfLeafless)
                 {
-                    if (MessagesRepeatAvoider.MessageShowAllowed("MessagePlantDiedOfHeat-" + def.defName, 3f))
+                    // Messages should only play for crops!
+                    if (this.IsCrop)
                     {
-                        string messageString = "MessagePlantDiedOfHeat".Translate(GetCustomLabelNoCount(false)).CapitalizeFirst();
-                        Messages.Message(messageString, new TargetInfo(Position, Map, false), MessageTypeDefOf.NegativeEvent);
+                        if (MessagesRepeatAvoider.MessageShowAllowed("MessagePlantDiedOfHeat-" + def.defName, 240f))
+                        {
+                            string messageString = "MessagePlantDiedOfHeat".Translate(GetCustomLabelNoCount(false)).CapitalizeFirst();
+                            Messages.Message(messageString, new TargetInfo(Position, Map, false), MessageTypeDefOf.NegativeEvent);
+                        }
                     }
+                    this.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999f));
                 }
-                
-                this.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999f));
+
+                // Otherwise, we just take the leaves away.
+                if (!def.plant.dieIfLeafless)
+                {
+                    this.madeLeaflessTick = Find.TickManager.TicksGame;
+                }
+
+                if (LeaflessNow)
+                {
+                    map.mapDrawer.MapMeshDirty(Position, MapMeshFlag.Things);
+                }
             }
         }
+
+
 
         // This is required for a workaround. No special behaviour.
         private float GrowthRateFactor_Temperature_Fragile
@@ -68,27 +95,27 @@ namespace HeatOfTheDesert
             }
             if (cellTemp > maxOptimalTemperature)
             {
-                // Growth rate decay starts at max optimal temperature and maxes out at the death temperature.
-                return Mathf.InverseLerp(deathTemperature, maxOptimalTemperature, cellTemp);
+                // Growth rate decay starts at max optimal temperature and maxes out at the max growth temperature.
+                return Mathf.InverseLerp(maxGrowthTemperature, maxOptimalTemperature, cellTemp);
             }
             return 1f;
         }
 
-        // I am not sure if these two are necessary, but I don't want to touch them.
-        //public override void PostMapInit()
-        //{
-        //    base.PostMapInit();
-        //    HeatDeathCheck();
-        //}
+        //I am not sure if these two are necessary, but I don't want to touch them.
+        public override void PostMapInit()
+        {
+            base.PostMapInit();
+            HeatDeathCheck();
+        }
 
-        //public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        //{
-        //    base.SpawnSetup(map, respawningAfterLoad);
-        //    if (Current.ProgramState == ProgramState.Playing && !respawningAfterLoad)
-        //    {
-        //        PostMapInit();
-        //    }
-        //}
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            if (Current.ProgramState == ProgramState.Playing && !respawningAfterLoad)
+            {
+                PostMapInit();
+            }
+        }
 
 
         // Everything from here on is UI-oriented.

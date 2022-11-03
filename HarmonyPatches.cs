@@ -56,7 +56,7 @@ namespace HeatOfTheDesert
                 {
                     // ExpandablePlants plants get their growth temperatures from the component properties.
                     minGrowthTemperature = Plant.MinGrowthTemperature;
-                    maxGrowthTemperature = Props.deathTemperature;
+                    maxGrowthTemperature = Props.maxGrowthTemperature;
                 }
 
                 __result = __result.Concat(new[] {
