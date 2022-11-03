@@ -24,9 +24,9 @@ namespace HeatOfTheDesert
         public override void ExposeData()
         {
             Scribe_Values.Look(ref plantsDie, "doPlantsDie");
-            Scribe_Values.Look(ref optimal, "optimalTemperature", 43);
-            Scribe_Values.Look(ref survivable, "survivableTemperature", 50);
-            Scribe_Values.Look(ref growth, "growthTemperature", 50);
+            Scribe_Values.Look(ref optimal, "optimalTemperature", 38);
+            Scribe_Values.Look(ref survivable, "survivableTemperature", 46);
+            Scribe_Values.Look(ref growth, "growthTemperature", 52);
             base.ExposeData();
         }
     }
